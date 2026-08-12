@@ -6,14 +6,14 @@ import path from "path";
 let clientEmail: string;
 let privateKey: string;
 
-// Se sono presenti le variabili d'ambiente,
-// usiamo quelle (Vercel).
 if (process.env.GOOGLE_CLIENT_EMAIL && process.env.GOOGLE_PRIVATE_KEY) {
   clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
 
-  privateKey = process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n");
+  privateKey = process.env.GOOGLE_PRIVATE_KEY
+    .replace(/^"|"$/g, "")
+    .replace(/\\n/g, "\n")
+    .trim();
 } else {
-  // In locale continuiamo a usare il file JSON.
   const credentialsPath = path.join(
     process.cwd(),
     "lezioni-allievi-4b056182017b.json"

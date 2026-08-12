@@ -10,9 +10,10 @@ if (process.env.GOOGLE_CLIENT_EMAIL && process.env.GOOGLE_PRIVATE_KEY) {
   clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
 
   privateKey = process.env.GOOGLE_PRIVATE_KEY
-    .replace(/^"|"$/g, "")
-    .replace(/\\n/g, "\n")
-    .trim();
+  .trim()
+  .replace(/^["']|["']$/g, "")
+  .replace(/\\n/g, "\n")
+  .trim();
 } else {
   const credentialsPath = path.join(
     process.cwd(),
